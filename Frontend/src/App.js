@@ -1,15 +1,23 @@
 import "./App.css";
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { useAuthContext } from "./Context/AuthContext";
 import wallpaper from "./images/wallpaper.jpg";
 import { Link } from "react-router-dom";
+import Login from "./components/login";
+import Home from "./components/Home";
+import Signup from "./components/signup";
 function App() {
+  const {authUser}=useAuthContext();
   return (
     <>
-      <div className="App">
-        <div className="header">
-          <h1 id="login"><Link to="/login">Login</Link></h1>
-        </div>
-        <img src={wallpaper} alt="wallpaper"></img>
-        <button className="cyber-btn">Start Streaming Now</button>
+    <div className="App">
+    <Routes>
+      <Route path='/' element={authUser?<Home/>:<Navigate to='/login'/>}></Route>
+      <Route path='/login' element={authUser?<Navigate to='/'/>:<Login/>}></Route>
+      <Route path='/signup' element={authUser?<Navigate to='/'/>:<Signup/>}></Route>
+       
+      </Routes>
+
       </div>
     </>
   );
