@@ -1,14 +1,13 @@
 import "./lobby.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import camera from "../images/camera.png";
 import mic from "../images/mic.png";
-import chat from "../images/chat.png";
-
+import invite from "../images/invite.png";
+import Popup from "./popup";
 let localStream;
 export default function Lobby() {
-  const [Messages, setMessages] = useState([]);
-  const [currentMessage, setCurrentMessage] = useState("");
-
+  const [stream,setStream] = useState("");
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   useEffect(() => {
     async function connect() {
       if (!localStream) {
@@ -22,33 +21,6 @@ export default function Lobby() {
     connect();
   }, []);
 
-  useEffect(() => {
-    const divider = document.getElementById("divider");
-    const container = document.getElementById("container");
-    const videos = document.getElementById("videos");
-    const chatContainer = document.getElementById("chat-container");
-
-    let isResizing = false;
-
-    divider.addEventListener("mousedown", (e) => {
-      isResizing = true;
-      document.addEventListener("mousemove", handleMouseMove);
-    });
-
-    document.addEventListener("mouseup", () => {
-      isResizing = false;
-      document.removeEventListener("mousemove", handleMouseMove);
-    });
-
-    function handleMouseMove(e) {
-      if (isResizing) {
-        const offset = container.getBoundingClientRect();
-        const newWidth = e.clientX - offset.left;
-        videos.style.width = `${newWidth}px`;
-        chatContainer.style.width = `calc(100% - ${newWidth}px)`;
-      }
-    }
-  });
   let toggleCamera = async (e) => {
     e.preventDefault();
     let videoTrack = localStream
@@ -81,61 +53,34 @@ export default function Lobby() {
         "rgb(179, 102, 249, .9)";
     }
   };
-  function toggleChat(e) {
-    e.preventDefault();
-    var chatContainer = document.getElementById("chat-container");
-    document.getElementById("chat-btn").style.backgroundColor =
-      document.getElementById("chat-btn").style.backgroundColor ===
-      "rgb(255, 80, 80)"
-        ? "rgb(179, 102, 249, .9)"
-        : "rgb(255, 80, 80)";
-    chatContainer.style.display =
-      chatContainer.style.display === "none" ? "block" : "none";
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
+  if(stream.length>0){
+    connect(stream);
   }
-  function handleSendMessage(e) {
-    e.preventDefault();
-    setMessages([
-      ...Messages,
-      {
-        id: Messages.length,
-        message: currentMessage,
-      },
-    ]);
-    setCurrentMessage("");
-    console.log(Messages);
+  async function connect(stream){
+    const url = "rtmp://a.rtmp.youtube.com/live2" + stream;
+
+  }
+  function handleSubmit(e){
+    setStream(e.target.value);
+    
   }
   return (
     <>
-      <div id="videos">
+      {isPopupOpen && <Popup onClose={closePopup} onSubmit={handleSubmit}/>}
+       <div id="videos">
         <video
           className="video-player"
           id="user-1"
           autoPlay
           playsInline
         ></video>
-        <div id="divider"></div>
-        <div id="chat-container" className="chat-container">
-          {Messages.map((message) => (
-            <div className="messages" key={message.id}>
-              {message.message}
-            </div>
-          ))}
-          <div className="input-container">
-            <input
-              type="text"
-              id="message-input"
-              value={currentMessage}
-              placeholder="Type a message..."
-              onChange={(e) => {
-                e.preventDefault();
-                setCurrentMessage(e.target.value);
-              }}
-            />
-            <button id="send-button" onClick={handleSendMessage}>
-              Send
-            </button>
-          </div>
-        </div>
       </div>
 
       <div id="controls">
@@ -157,16 +102,15 @@ export default function Lobby() {
         >
           <img src={mic} alt="mic" />
         </button>
+
         <button
           className="control-container"
-          id="chat-btn"
-          onClick={(e) => {
-            toggleChat(e);
-          }}
+          id="invite-btn"
+          onClick={openPopup}
         >
-          <img src={chat} alt="chat" />
+          <img src={invite} alt="start streaming" />
         </button>
-      </div>
+      </div> 
     </>
   );
 }
