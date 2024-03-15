@@ -1,8 +1,19 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import "./login.css";
 import { Link } from "react-router-dom";
-import axios from "axios"
+import useLogin from "../hooks/useLogin";
+import { useAuthContext } from "../Context/AuthContext";
 export default function Login() {
+  const [username,setUsername] = useState("");
+    const [password,setPassword] = useState("");
+
+    const {login} = useLogin();
+    const handleSubmit = async(e)=>{
+      e.preventDefault();
+      await login(username,password);
+  }
+
+  const {authUser}=useAuthContext();
   const themes = [
     {
       background: "#1A1A2E",
@@ -72,10 +83,10 @@ export default function Login() {
             className="illustration"
           />
           <h1 className="opacity">LOGIN</h1>
-          <form>
-            <input type="text" placeholder="USERNAME" />
-            <input type="password" placeholder="PASSWORD" />
-            <button className="opacity" onClick={handleSubmit}>SUBMIT</button>
+          <form onSubmit={handleSubmit}>
+            <input type="text" value={username}  onChange={(e)=>setUsername(e.target.value)}placeholder="USERNAME" />
+            <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="PASSWORD" />
+            <button className="opacity">SUBMIT</button>
           </form>
           <div className="register-forget opacity">
           <Link to="/signup">REGISTER</Link>

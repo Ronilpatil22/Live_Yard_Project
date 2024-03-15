@@ -1,6 +1,17 @@
 import UserSignUp from "../model/user.model.js";
 import bcrypt from 'bcryptjs';
+import generateTokenandSetCookie from "../utils/generateToken.js";
 
+
+export const logout = (req,res)=>{
+    try{
+        res.cookie("jwt","",{maxAge:0});
+        res.status(200).json({message:"Logged out successfully"});
+    }catch(error){  
+        console.log("Error in Login Controller",error.message);
+        res.status(500).json({error:"Internal Server Error"});
+}
+}
 export const login = async(req,res)=>{
     try{
 
@@ -12,7 +23,7 @@ export const login = async(req,res)=>{
             if(!user || !isCorrectPassword){
                 return res.status(400).json({error:"Invalid Username or Password"});
             }
-
+            generateTokenandSetCookie(user._id,res);
             res.status(200).json({
                 _id:user._id,
                     fullName:user.fullName,
@@ -51,6 +62,7 @@ export const signup = async(req,res)=>{
                 gender
             })
             if(newSignup){
+                generateTokenandSetCookie(newSignup._id,res);
                 await newSignup.save();
                 res.status(201).json({
                     _id:newSignup._id,

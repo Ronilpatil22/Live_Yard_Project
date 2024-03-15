@@ -4,30 +4,32 @@ import "./index.css";
 import App from "./App";
 import Login from "./components/login";
 import Signup from "./components/signup";
-import Lobby from "./components/lobby";
-import { createBrowserRouter,RouterProvider } from "react-router-dom";
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <h1>404 error not Found</h1>
-  },
-  {
-    path: "/login",
-    element: <Login />
-  },
-  {
-    path: "/signup",
-    element: <Signup />
-  },
-  {
-    path: "/lobby",
-    element: <Lobby />
-  }
-])
+import { BrowserRouter, createBrowserRouter,RouterProvider } from "react-router-dom";
+import { AuthContextProvider } from "./Context/AuthContext";
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <App />
+//   },
+//   {
+//     path: "/login",
+//     element: <Login />
+//   },
+//   {
+//     path: "/signup",
+//     element: <Signup />
+//   }
+// ])
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  
   <React.StrictMode>
-    <RouterProvider router={router}></RouterProvider>
-  </React.StrictMode>
+    <BrowserRouter>
+  <AuthContextProvider>
+    {/* <RouterProvider router={router}></RouterProvider> */}
+    <App/>
+    </AuthContextProvider>
+  </BrowserRouter>
+  </React.StrictMode>,
+  
 );

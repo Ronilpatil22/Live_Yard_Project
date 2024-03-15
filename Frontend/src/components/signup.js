@@ -1,6 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./signup.css";
+import useSignup from "../hooks/useSignUp";
 export default function Signup() {
+  const {signup} = useSignup();
+  const [inputs,setInputs] = useState({
+    fullName:'',
+    username:'',
+    password:'',
+    confirmPassword:'',
+    email:'',
+    gender:''
+  })
+
+  const  handleSubmit = async(e)=>{
+    e.preventDefault();
+    console.log(inputs);
+    await signup(inputs);
+  }
   const themes = [
     {
       background: "#1A1A2E",
@@ -67,13 +83,13 @@ export default function Signup() {
             className="illustration"
           />
           <h1 className="opacity">SIGNUP</h1>
-          <form>
-            <input type="text" placeholder="FULLNAME" />
-            <input type="text" placeholder="USERNAME" />
-            <input type="password" placeholder="PASSWORD" />
-            <input type="password" placeholder="CONFIRM PASSWORD" />
-            <input type="email" placeholder="EMAIL" />
-            <input type="text" placeholder="GENDER" />
+          <form onSubmit={handleSubmit}>
+            <input type="text" value={inputs.fullName} onChange={(e)=>setInputs({...inputs,fullName:e.target.value})} placeholder="FULLNAME" />
+            <input type="text" value={inputs.username} onChange={(e)=>setInputs({...inputs,username:e.target.value})} placeholder="USERNAME" />
+            <input type="text" value={inputs.password} onChange={(e)=>setInputs({...inputs,password:e.target.value})} placeholder="PASSWORD" />
+            <input type="text" value={inputs.confirmPassword} onChange={(e)=>setInputs({...inputs,confirmPassword:e.target.value})} placeholder="CONFIRM PASSWORD" />
+            <input type="email" value={inputs.email} onChange={(e)=>setInputs({...inputs,email:e.target.value})} placeholder="EMAIL" />
+            <input type="text" value={inputs.gender} onChange={(e)=>setInputs({...inputs,gender:e.target.value})} placeholder="GENDER" />
             <button className="opacity">SUBMIT</button>
           </form>
         </div>
