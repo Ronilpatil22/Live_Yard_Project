@@ -4,11 +4,13 @@ import "./index.css";
 import App from "./App";
 import Login from "./components/login";
 import Signup from "./components/signup";
+import Lobby from "./components/lobby";
 import { createBrowserRouter,RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />
+    element: <App />,
+    errorElement: <h1>404 error not Found</h1>
   },
   {
     path: "/login",
@@ -17,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />
+  },
+  {
+    path: "/lobby",
+    element: <Lobby />
   }
 ])
 const root = ReactDOM.createRoot(document.getElementById("root"));

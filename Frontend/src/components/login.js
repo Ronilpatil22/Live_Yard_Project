@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import "./login.css";
 import { Link } from "react-router-dom";
+import axios from "axios"
 export default function Login() {
   const themes = [
     {
@@ -56,6 +57,9 @@ export default function Login() {
 
     displayThemeButtons();
   });
+  async function handleSubmit(e){
+    
+  }
 
   return (
     <section className="container">
@@ -71,7 +75,7 @@ export default function Login() {
           <form>
             <input type="text" placeholder="USERNAME" />
             <input type="password" placeholder="PASSWORD" />
-            <button className="opacity">SUBMIT</button>
+            <button className="opacity" onClick={handleSubmit}>SUBMIT</button>
           </form>
           <div className="register-forget opacity">
           <Link to="/signup">REGISTER</Link>
