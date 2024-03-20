@@ -13,7 +13,8 @@ const Popup = ({ onClose,onSubmit }) => {
          <button className="close" onClick={onClose}>✖</button>
       <form>
         <input type="text" value={streamKey} placeholder="Stream-Key" onChange={handleChange}></input>
-        <button className="opacity" onClick={(e)=>onSubmit(e)}>Submit</button>
+        <button className="opacity" onClick={(e)=>{
+          onSubmit(e,streamKey)}}>Submit</button>
       </form>
     </div>
   </div>

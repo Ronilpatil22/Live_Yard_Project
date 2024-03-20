@@ -6,7 +6,7 @@ import invite from "../images/invite.png";
 import Popup from "./popup";
 let localStream;
 export default function Lobby() {
-  const [stream,setStream] = useState("");
+  const [stream, setStream] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   useEffect(() => {
     async function connect() {
@@ -60,21 +60,39 @@ export default function Lobby() {
   const closePopup = () => {
     setIsPopupOpen(false);
   };
-  if(stream.length>0){
-    connect(stream);
-  }
-  async function connect(stream){
-    const url = "rtmp://a.rtmp.youtube.com/live2" + stream;
+  async function handleSubmit(e, streamKey) {
+    setStream(streamKey);
 
-  }
-  function handleSubmit(e){
-    setStream(e.target.value);
-    
+    // Create WebSocket connection
+    const socket = new WebSocket("ws://your-server-address:3000");
+
+    socket.onopen = function (event) {
+      console.log("WebSocket opened");
+    };
+
+    socket.onmessage = function (event) {
+      console.log("Message from server ", event.data);
+    };
+
+    socket.onclose = function (event) {
+      console.log("WebSocket closed");
+    };
+
+    // Start recording video and audio
+    const recorder = new MediaRecorder(localStream);
+
+    recorder.ondataavailable = function (event) {
+      if (event.data.size > 0) {
+        socket.send(event.data);
+      }
+    };
+
+    recorder.start();
   }
   return (
     <>
-      {isPopupOpen && <Popup onClose={closePopup} onSubmit={handleSubmit}/>}
-       <div id="videos">
+      {isPopupOpen && <Popup onClose={closePopup} onSubmit={handleSubmit} />}
+      <div id="videos">
         <video
           className="video-player"
           id="user-1"
@@ -110,7 +128,7 @@ export default function Lobby() {
         >
           <img src={invite} alt="start streaming" />
         </button>
-      </div> 
+      </div>
     </>
   );
 }
