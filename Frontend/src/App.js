@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Login from "./components/login";
 import Home from "./components/Home";
 import Signup from "./components/signup";
+import Lobby from "./components/lobby";
 function App() {
   const {authUser}=useAuthContext();
   return (
@@ -15,7 +16,7 @@ function App() {
       <Route path='/' element={authUser?<Home/>:<Navigate to='/login'/>}></Route>
       <Route path='/login' element={authUser?<Navigate to='/'/>:<Login/>}></Route>
       <Route path='/signup' element={authUser?<Navigate to='/'/>:<Signup/>}></Route>
-       
+       <Route path='/lobby' element={authUser?<Lobby/>:<Navigate to='/login'/>}/>
       </Routes>
 
       </div>
