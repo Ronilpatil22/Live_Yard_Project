@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import camera from "../images/camera.png";
 import mic from "../images/mic.png";
 import invite from "../images/invite.png";
+import io from "socket.io-client";
 import Popup from "./popup";
 let localStream;
 export default function Lobby() {
@@ -61,33 +62,28 @@ export default function Lobby() {
     setIsPopupOpen(false);
   };
   async function handleSubmit(e, streamKey) {
-    setStream(streamKey);
+    e.preventDefault();
+    const socket = io();
 
-    // Create WebSocket connection
-    const socket = new WebSocket("ws://your-server-address:3000");
-
-    socket.onopen = function (event) {
-      console.log("WebSocket opened");
-    };
-
-    socket.onmessage = function (event) {
-      console.log("Message from server ", event.data);
-    };
-
-    socket.onclose = function (event) {
-      console.log("WebSocket closed");
-    };
-
+    // Add event listeners or perform any necessary operations with the socket
+    socket.on("connect", () => {
+      console.log("Connected to server");
+    });
     // Start recording video and audio
-    const recorder = new MediaRecorder(localStream);
+    const recorder = new MediaRecorder(localStream, {
+      audioBitsPerSecond: 128000,
+      videoBitsPerSecond: 2500000,
+      framerate: 25,
+    });
 
     recorder.ondataavailable = function (event) {
       if (event.data.size > 0) {
-        socket.send(event.data);
+        console.log("Binary data incoming...");
+        socket.emit(event.data);
       }
     };
 
-    recorder.start();
+    recorder.start(25);
   }
   return (
     <>

@@ -6,6 +6,7 @@ const Popup = ({ onClose,onSubmit }) => {
   function handleChange(e){
     e.preventDefault();
     setStreamKey(e.target.value);
+    console.log(streamKey);
   }
   return (
     <div className="popup-container">
