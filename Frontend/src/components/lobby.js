@@ -3,11 +3,10 @@ import { useEffect, useState, useRef } from "react";
 import camera from "../images/camera.png";
 import mic from "../images/mic.png";
 import invite from "../images/invite.png";
-import io from "socket.io-client";
+import { socket } from '../socket';
 import Popup from "./popup";
 let localStream;
 export default function Lobby() {
-  const [stream, setStream] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   useEffect(() => {
     async function connect() {
@@ -62,9 +61,9 @@ export default function Lobby() {
     setIsPopupOpen(false);
   };
   async function handleSubmit(e, streamKey) {
+    console.log("1");
     e.preventDefault();
-    const socket = io();
-
+    socket.connect();
     // Add event listeners or perform any necessary operations with the socket
     socket.on("connect", () => {
       console.log("Connected to server");
@@ -82,7 +81,9 @@ export default function Lobby() {
         socket.emit(event.data);
       }
     };
-
+    socket.on("disconnect",()=>{
+      console.log("Socket connection disconnected")
+    })
     recorder.start(25);
   }
   return (
