@@ -1,11 +1,14 @@
 import React from 'react'
 import { useAuthContext } from "../Context/AuthContext";
-import "./Home.css"
-import "./bootstrap.min.css"
-import "bootstrap/dist/js/bootstrap.min.js"
-import "bootstrap/dist/js/popper.min.js";
-import 'bootstrap/dist/js/holder.min.js';
-import 'bootstrap/dist/js/jquery.slim.min.js';
+// import "./Home.css"
+// import "./bootstrap.min.css"
+// import "bootstrap/dist/js/bootstrap.min.js"
+// import "bootstrap/dist/js/popper.min.js";
+// import 'bootstrap/dist/js/holder.min.js';
+// import 'bootstrap/dist/js/jquery.slim.min.js';
+// import   from 'react-bootstrap';
+
+// https://meet.google.com/ccd-wrxz-prp
 
 // import Login from "";
 const Home = () => {

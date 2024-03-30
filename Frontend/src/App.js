@@ -8,6 +8,8 @@ import Login from "./components/login";
 import Home from "./components/Home";
 import Signup from "./components/signup";
 import Lobby from "./components/lobby";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import  'react-bootstrap';
 function App() {
   const { authUser } = useAuthContext();
   return (
