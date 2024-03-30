@@ -1,28 +1,13 @@
-import React from 'react'
+import React from 'react';
 import { useAuthContext } from "../Context/AuthContext";
-// import "./Home.css"
-// import "./bootstrap.min.css"
-// import "bootstrap/dist/js/bootstrap.min.js"
-// import "bootstrap/dist/js/popper.min.js";
-// import 'bootstrap/dist/js/holder.min.js';
-// import 'bootstrap/dist/js/jquery.slim.min.js';
-// import   from 'react-bootstrap';
+import "./Home.css";
 
-// https://meet.google.com/ccd-wrxz-prp
-
-// import Login from "";
 const Home = () => {
-  const {authUser}=useAuthContext();
+  const { authUser } = useAuthContext();
+  
   return (
-        // <>
-        // {/* <div className="header"> */}
-          // {/* <h1 id="login">{authUser?"":<Link to="/login">Login</Link>}</h1> */}
-        // </div>
-        // <img src={wallpaper} alt="wallpaper"></img>
-        // <Link to="/lobby"><button className="cyber-btn">Start Streaming Now</button></Link>
-        // </>
-        <>
-        <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <div className="home-container">
+      <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
         <h5 className="my-0 mr-md-auto font-weight-normal">Company name</h5>
         <nav className="my-2 my-md-0 mr-md-3">
           <a className="p-2 text-dark" href="#">
@@ -52,6 +37,7 @@ const Home = () => {
       </div>
       <div className="container">
         <div className="card-deck mb-3 text-center">
+          {/* Card components */}
           <div className="card mb-4 box-shadow">
             <div className="card-header">
               <h4 className="my-0 font-weight-normal">Free</h4>
@@ -113,7 +99,8 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <footer className="pt-4 my-md-5 pt-md-5 border-top">
+      </div>
+      <footer className="pt-4 my-md-5 pt-md-5 border-top">
           <div className="row">
             <div className="col-12 col-md">
               <img
@@ -212,9 +199,8 @@ const Home = () => {
             </div>
           </div>
         </footer>
-      </div>
-    </>
-  )
+    </div>
+  );
 }
 
 export default Home;
