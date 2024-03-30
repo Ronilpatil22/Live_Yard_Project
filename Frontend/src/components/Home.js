@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuthContext } from "../Context/AuthContext";
 import "./Home.css";
-
+import { Link } from "react-router-dom";
 const Home = () => {
   const { authUser } = useAuthContext();
   
@@ -23,9 +23,9 @@ const Home = () => {
             Pricing
           </a>
         </nav>
-        <a className="btn btn-outline-primary" href="#">
+        <Link to="/signup" className="btn btn-outline-primary" >
           Sign up
-        </a>
+        </Link>
       </div>
       <div className="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <h1 className="display-4">Pricing</h1>

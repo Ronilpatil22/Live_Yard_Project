@@ -19,15 +19,15 @@ function App() {
           <Route path="/lobby" element={<Lobby />}></Route>
           <Route
             path="/"
-            element={authUser ? <Home /> : <Navigate to="/login" />}
+            element={<Home />}
           ></Route>
           <Route
             path="/login"
-            element={authUser ? <Navigate to="/" /> : <Login />}
+            element={ <Login />}
           ></Route>
           <Route
             path="/signup"
-            element={authUser ? <Navigate to="/" /> : <Signup />}
+            element={<Signup />}
           ></Route>
           {/* <Route path='/lobby' element={authUser?<Lobby/>:<Navigate to='/login'/>}/> */}
         </Routes>

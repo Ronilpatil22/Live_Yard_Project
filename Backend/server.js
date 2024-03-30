@@ -58,28 +58,6 @@ const options = [
   `rtmp://a.rtmp.youtube.com/live2/1324-2k1p-84wh-19r8-7g7j`,
 ];
 const httpServer = createServer(app);
-// const httpServer = http.createServer((req, res) => {
-//   const parsedUrl = url.parse(req.url, true);
-//     // Extract the path from the URL
-//     const path = parsedUrl.pathname;
-
-//     // Set up middleware functions
-//     json()(req, res, () => {}); // Parse JSON request bodies
-//     urlencoded({ extended: false })(req, res, () => {}); // Parse URL-encoded request bodies
-//     cookieParser()(req, res, () => {}); // Parse cookies
-//     cors()(req, res, () => {}); // Enable CORS
-
-//     // Route requests based on the path
-//     if (path.startsWith('/api')) {
-//         // Route API requests to the user route module
-//         userroute(req, res);
-//     } else {
-//         // Handle other routes (e.g., static files, etc.)
-//         // Add your custom logic here
-//         res.writeHead(404, { 'Content-Type': 'text/plain' });
-//         res.end('404 Not Found');
-//     }
-// });
 httpServer.listen(PORT, () => {
   connectToMongo();
   console.log("Listening on port ${PORT}");
@@ -114,7 +92,4 @@ io.on("connection", (socket) => {
       console.log("Err", err);
     });
   });
-});
-io.on("error", (err) => {
-  console.log(err);
 });
