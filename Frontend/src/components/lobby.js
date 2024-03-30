@@ -68,6 +68,9 @@ export default function Lobby() {
     socket.on("connect", () => {
       console.log("Connected to server");
     });
+    socket.on("error",(err)=>{
+      console.log(err)
+    })
     // Start recording video and audio
     const recorder = new MediaRecorder(localStream, {
       audioBitsPerSecond: 128000,
@@ -78,7 +81,7 @@ export default function Lobby() {
     recorder.ondataavailable = function (event) {
       if (event.data.size > 0) {
         console.log("Binary data incoming...");
-        socket.emit(event.data);
+        socket.emit("binarystream",event.data);
       }
     };
     socket.on("disconnect",()=>{

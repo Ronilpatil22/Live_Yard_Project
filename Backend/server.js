@@ -3,7 +3,7 @@ import userroute from "./routes/user.routes.js";
 import connectToMongo from "./db/connectToMongoDB.js";
 import dotenv from "dotenv";
 import { createServer } from "http";
-import { Server } from "socket.io";
+import pkg from "socket.io";
 import RtmpServer from "node-media-server";
 import { spawn } from "child_process";
 import cookieParser from "cookie-parser";
@@ -18,10 +18,6 @@ app.use(cookieParser());
 app.use(cors());
 app.use("/api", userroute);
 
-// app.listen(PORT, () => {
-
-//     console.log(`Listening on port ${PORT}`);
-// });
 const options = [
   "-i",
   "-",
@@ -82,7 +78,7 @@ ffmpegProcess.on("close", (code) => {
 });
 
 // Handle WebSocket connection
-const io = new Server(httpServer, {
+const io = pkg(httpServer, {
   cors: {
     origin: "http://localhost:5000",
     methods: ["GET", "POST"],
@@ -97,3 +93,6 @@ io.on("connection", (socket) => {
     });
   });
 });
+io.on("error",(err)=>{
+  console.log(err);
+})
