@@ -4,7 +4,6 @@ import "./Home.css";
 import { Link } from "react-router-dom";
 const Home = () => {
   const { authUser } = useAuthContext();
-  
   return (
     <div className="home-container">
       <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
