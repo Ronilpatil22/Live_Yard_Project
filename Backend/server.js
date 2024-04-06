@@ -1,5 +1,6 @@
 import express from "express";
 import userroute from "./routes/user.routes.js";
+import streamroute from "./routes/stream.routes.js";
 import connectToMongo from "./db/connectToMongoDB.js";
 import dotenv from "dotenv";
 import { createServer } from "http";
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 app.use("/api", userroute); 
+app.use("/", streamroute); 
 
 
 const options = [

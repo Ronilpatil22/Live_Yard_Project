@@ -5,8 +5,10 @@ import mic from "../images/mic.png";
 import invite from "../images/invite.png";
 import { socket } from '../socket';
 import Popup from "./popup";
+import useStream from "../hooks/useStream";
 let localStream;
 export default function Lobby() {
+  const {stream} = useStream();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   useEffect(() => {
     async function connect() {
