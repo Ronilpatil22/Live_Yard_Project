@@ -3,17 +3,20 @@ import mongoose from "mongoose";
 
 const streamSchema = new mongoose.Schema({
     streamKey:{
-        type:String
+        type:String,
+        unique:false
     },
     audioBitsPerSecond:{
-        type:String
+        type:String,
+        unique:false
     },
     videoBitsPerSecond:{
-        type:String
-        
+        type:String,
+        unique:false
     },
     framerate:{
-        type:String
+        type:String,
+        unique:false
     },
     
 },{timestamps:true});

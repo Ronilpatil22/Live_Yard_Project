@@ -1,7 +1,7 @@
 
 
 const useStream =()=>{
-    const stream = async({streamKey,audioBitsPerSecond,videoBitsPerSecond,framerate})=>{
+    const stream = async(streamKey,audioBitsPerSecond,videoBitsPerSecond,framerate)=>{
             try{
                 const res = await fetch('http://localhost:3000/stream',{
                     method:"POST",

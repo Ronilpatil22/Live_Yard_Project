@@ -24,59 +24,11 @@ app.use("/api", userroute);
 app.use("/", streamroute); 
 
 
-const options = [
-  "-i",
-  "-",
-  "-c:v",
-  "libx264",
-  "-preset",
-  "ultrafast",
-  "-tune",
-  "zerolatency",
-  "-r",
-  `${25}`,
-  "-g",
-  `${25 * 2}`,
-  "-keyint_min",
-  25,
-  "-crf",
-  "25",
-  "-pix_fmt",
-  "yuv420p",
-  "-sc_threshold",
-  "0",
-  "-profile:v",
-  "main",
-  "-level",
-  "3.1",
-  "-c:a",
-  "aac",
-  "-b:a",
-  "128k",
-  "-ar",
-  32000,
-  "-f",
-  "flv",
-  `rtmp://a.rtmp.youtube.com/live2/1324-2k1p-84wh-19r8-7g7j`,
-];
+
 const httpServer = createServer(app);
 httpServer.listen(PORT, () => {
   connectToMongo();
   console.log("Listening on port ${PORT}");
-});
-
-const ffmpegProcess = spawn("ffmpeg", options);
-
-ffmpegProcess.stdout.on("data", (data) => {
-  console.log(`ffmpeg stdout: ${data}`);
-});
-
-ffmpegProcess.stderr.on("data", (data) => {
-  console.error(`ffmpeg stderr: ${data}`);
-});
-
-ffmpegProcess.on("close", (code) => {
-  console.log(`ffmpeg process exited with code ${code}`);
 });
 
 // Handle WebSocket connection
@@ -88,10 +40,61 @@ const io = pkg(httpServer, {
 });
 io.on("connection", (socket) => {
   console.log("New WebSocket connection");
+
+  socket.on("userCookie",(streamKey)=>{
+  const options = [
+    "-i",
+    "-",
+    "-c:v",
+    "libx264",
+    "-preset",
+    "ultrafast",
+    "-tune",
+    "zerolatency",
+    "-r",
+    `${25}`,
+    "-g",
+    `${25 * 2}`,
+    "-keyint_min",
+    25,
+    "-crf",
+    "25",
+    "-pix_fmt",
+    "yuv420p",
+    "-sc_threshold",
+    "0",
+    "-profile:v",
+    "main",
+    "-level",
+    "3.1",
+    "-c:a",
+    "aac",
+    "-b:a",
+    "128k",
+    "-ar",
+    32000,
+    "-f",
+    "flv",
+    `rtmp://a.rtmp.youtube.com/live2/${streamKey}`,
+  ];
+ const ffmpegProcess = spawn("ffmpeg", options);
+
+  ffmpegProcess.stdout.on("data", (data) => {
+    console.log(`ffmpeg stdout: ${data}`);
+  });
+  
+  ffmpegProcess.stderr.on("data", (data) => {
+    console.error(`ffmpeg stderr: ${data}`);
+  });
+  
+  ffmpegProcess.on("close", (code) => {
+    console.log(`ffmpeg process exited with code ${code}`);
+  });
   socket.on("binarystream", (stream) => {
     console.log("Binary Stream Incoming");
-    ffmpegProcess.stdin.write(stream, (err) => {
+  ffmpegProcess.stdin.write(stream, (err) => {
       console.log("Err", err);
     });
   });
+})
 });

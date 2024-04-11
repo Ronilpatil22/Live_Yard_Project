@@ -20,7 +20,7 @@
   position: fixed;
   z-index: 1; /* Ensure the header is above the image */
 }
-
+/* 
 #login {
   top: 20px;
   right: 20px;
@@ -31,7 +31,6 @@
   text-align: right;
 }
 
-/* CSS */
 .button-85 {
   padding: 0.6em 2em;
   position: absolute;
@@ -42,7 +41,6 @@
   color: rgb(255, 255, 255);
   background: #111;
   cursor: pointer;
-  /* position: relative; */
   z-index: 0;
   border-radius: 10px;
   user-select: none;
@@ -102,18 +100,16 @@
   border-radius: 10px;
 }
 
-/* CSS */
 .button-85 {
   position: absolute;
-  bottom: 20px; /* Adjust as needed */
-  left: 20px; /* Adjust as needed */
+  bottom: 20px; 
+  left: 20px; 
   padding: 0.6em 2em;
   border: none;
   outline: none;
   color: rgb(255, 255, 255);
   background: #111;
   cursor: pointer;
-  /* position: relative; */
   z-index: 0;
   border-radius: 10px;
   user-select: none;
@@ -171,4 +167,5 @@
   left: 0;
   top: 0;
   border-radius: 10px;
-}
+} 
+*/

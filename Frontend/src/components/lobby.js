@@ -62,17 +62,16 @@ export default function Lobby() {
   const closePopup = () => {
     setIsPopupOpen(false);
   };
-  async function handleSubmit(e, streamKey) {
-    console.log("1");
+  async function handleSubmit(e,streamKey) {
     e.preventDefault();
     socket.connect();
-    // Add event listeners or perform any necessary operations with the socket
     socket.on("connect", () => {
       console.log("Connected to server");
     });
     socket.on("error",(err)=>{
       console.log(err)
     })
+    socket.emit("userCookie",streamKey);
     // Start recording video and audio
     const recorder = new MediaRecorder(localStream, {
       audioBitsPerSecond: 128000,

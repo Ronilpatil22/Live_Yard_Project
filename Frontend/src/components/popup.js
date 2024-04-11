@@ -13,7 +13,9 @@ const Popup = ({ onClose,onSubmit }) => {
   }
   function handlesubmit(e){
     e.preventDefault();
+    onClose();
     stream(streamKey,"250000","604030","24");
+    onSubmit(e,streamKey);
   }
   return (
     <div className="popup-container">
