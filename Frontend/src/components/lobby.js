@@ -8,7 +8,7 @@ import Popup from "./popup";
 import useStream from "../hooks/useStream";
 let localStream;
 export default function Lobby() {
-  const {stream} = useStream();
+  
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   useEffect(() => {
     async function connect() {

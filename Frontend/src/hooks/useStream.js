@@ -1,12 +1,12 @@
 
 
 const useStream =()=>{
-    const stream = async()=>{
+    const stream = async({streamKey,audioBitsPerSecond,videoBitsPerSecond,framerate})=>{
             try{
                 const res = await fetch('http://localhost:3000/stream',{
                     method:"POST",
                     headers:{"Content-Type":"application/json"},
-                    body:JSON.stringify({})
+                    body:JSON.stringify({streamKey,audioBitsPerSecond,videoBitsPerSecond,framerate})
                     })
         
                     const data = await res.json();

@@ -16,18 +16,18 @@ function App() {
     <>
       <div className="App">
         <Routes>
-          <Route path="/lobby" element={<Lobby />}></Route>
+          <Route path="/lobby" element={authUser?<Lobby />:<Login/>}></Route>
           <Route
             path="/"
-            element={<Home />}
+            element={authUser?<Home />:<Login/>}
           ></Route>
           <Route
             path="/login"
-            element={ <Login />}
+            element={authUser?<Home/>:<Login />}
           ></Route>
           <Route
             path="/signup"
-            element={<Signup />}
+            element={authUser?<Home/>:<Signup/>}
           ></Route>
           {/* <Route path='/lobby' element={authUser?<Lobby/>:<Navigate to='/login'/>}/> */}
         </Routes>
