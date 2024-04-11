@@ -105,7 +105,7 @@ export default function Signup() {
         placeholder="GENDER"
         required=""
       />
-      <button className="btn btn-lg btn-primary btn-block" type="submit">
+      <button className="btn btn-lg btn-primary btn-block">
         Sign Up
       </button>
       <p className="mt-5 mb-3 text-muted">© 2017-2018</p>

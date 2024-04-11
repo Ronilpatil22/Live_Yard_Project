@@ -25,12 +25,12 @@ export default function Login() {
         height={72}
       />
       <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <label htmlFor="inputEmail" className="sr-only">
+      <label htmlFor="inputUserName" className="sr-only">
         Email address
       </label>
       <input
-        type="email"
-        id="inputEmail"
+        type="text"
+        id="inputUserName"
         className="form-control"
         placeholder="USERNAME"
         required=""
@@ -61,7 +61,7 @@ export default function Login() {
           <input type="checkbox" defaultValue="remember-me" /> Remember me
         </label>
       </div>
-      <button className="btn btn-lg btn-primary btn-block" type="submit">
+      <button className="btn btn-lg btn-primary btn-block">
         Sign in
       </button>
       <p className="">
