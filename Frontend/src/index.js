@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import Login from "./components/login";
-import Signup from "./components/signup";
+import Login from "./components/js/login";
+import Signup from "./components/js/signup";
 import { BrowserRouter, createBrowserRouter,RouterProvider } from "react-router-dom";
 import { AuthContextProvider } from "./Context/AuthContext";
 // const router = createBrowserRouter([
