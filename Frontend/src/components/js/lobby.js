@@ -1,11 +1,11 @@
-import "./lobby.css";
+import "..css/lobby.css";
 import { useEffect, useState, useRef } from "react";
 import camera from "../images/camera.png";
 import mic from "../images/mic.png";
 import invite from "../images/invite.png";
-import { socket } from '../socket';
+import { socket } from '../../socket';
 import Popup from "./popup";
-import useStream from "../hooks/useStream";
+import useStream from "../../hooks/useStream";
 
 let localStream;
 
