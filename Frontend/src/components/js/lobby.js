@@ -1,17 +1,26 @@
-import "..css/lobby.css";
+import "../css/lobby.css";
 import { useEffect, useState, useRef } from "react";
 import camera from "../images/camera.png";
 import mic from "../images/mic.png";
-import invite from "../images/invite.png";
+import cast from "../images/cast.png";
 import { socket } from '../../socket';
 import Popup from "./popup";
 import useStream from "../../hooks/useStream";
+import "../css/bootstrap.min.css";
+import "../css/bootstrap-icons.css";
+import "../css/templatemo-festava-live.css";
+import $ from "jquery";
+import Popper from "popper.js";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import 'bootstrap/dist/js/bootstrap.min.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 let localStream;
 
 export default function Lobby() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isVideoOnCanvas, setIsVideoOnCanvas] = useState(false);
+  const [isCastOnCanvas,setIsCastOnCanvas] = useState(false);
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -31,6 +40,11 @@ export default function Lobby() {
   const toggleVideoOnCanvas = () => {
     
     setIsVideoOnCanvas(prevState => !prevState);
+  };
+
+  const toggleCastOnCanvas = () => {
+    
+    setIsCastOnCanvas(prevState => !prevState);
   };
 
   const toggleCamera = async (e) => {
@@ -66,6 +80,22 @@ export default function Lobby() {
         "rgb(179, 102, 249, .9)";
     }
   };
+
+  async function captureScreen() {
+    let mediaStream = null;
+    try {
+        mediaStream = await navigator.mediaDevices.getDisplayMedia({
+            video: {
+                cursor: "always"
+            },
+            audio: false
+        });
+        document.getElementById("canvas-1").srcObject = mediaStream;
+    } catch (ex) {
+        console.log("Error occurred", ex);
+    }
+    return mediaStream;
+}
 
   const openPopup = () => {
     setIsPopupOpen(true);
@@ -119,35 +149,82 @@ export default function Lobby() {
   }
 
   useEffect(() => {
-    if (isVideoOnCanvas) {
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext("2d");
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
   
-      const drawFrame = () => {
-        ctx.drawImage(document.getElementById("user-1"), 0, 0, canvas.width, canvas.height);
-        requestAnimationFrame(drawFrame);
-      };
+    let animationFrameId;
   
-      drawFrame();
-      
-    } 
-    if(!isVideoOnCanvas){
-      
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext("2d"); // Create context here when isVideoOnCanvas is false
-      canvasRef.current.display = "none";
-     
+    const drawFrame = () => {
+      // Clear the canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.beginPath();
-      console.log("In else part");
-    }
-  }, [isVideoOnCanvas]);
-  // if(!isVideoOnCanvas){
-  //   const canvas = canvasRef.current;
-  //     const ctx = canvas.getContext("2d"); // Create context here when isVideoOnCanvas is false
   
-  //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-  // }
+      if (isVideoOnCanvas) {
+        const video = document.getElementById("user-1");
+        if (video instanceof HTMLVideoElement) {
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        } else {
+          console.error("Element with ID 'user-1' is not a video element");
+        }
+      } else {
+        const image = document.querySelector(".canvas");
+        if (image instanceof HTMLImageElement) {
+          ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        } else {
+          console.error("Element with class 'canvas' is not an image element");
+        }
+      }
+  
+      animationFrameId = requestAnimationFrame(drawFrame);
+    };
+  
+    drawFrame();
+  
+    // Cleanup function
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [isVideoOnCanvas]);
+
+  useEffect(() => {
+    if(isCastOnCanvas){
+      const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    let videoElement = captureScreen();
+    const drawFrame = () => {
+      
+      // Clear the canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw the screen share stream onto the canvas
+      ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+      // Request the next frame
+      requestAnimationFrame(drawFrame);
+    };
+
+    // Get the screen share stream
+    navigator.mediaDevices.getDisplayMedia({ video: true })
+      .then(stream => {
+        // Create a video element to play the stream
+        const videoElement = document.createElement('video');
+        videoElement.srcObject = stream;
+        videoElement.play();
+
+        // Start drawing frames onto the canvas
+        drawFrame();
+      })
+      .catch(error => {
+        console.error('Error accessing screen share:', error);
+      });
+      setIsCastOnCanvas(!isCastOnCanvas)
+    }
+    // Cleanup function
+    return () => {
+      // Stop the screen share stream if it's still active
+      // videoElement.srcObject.getTracks().forEach(track => track.stop());
+    };
+  }, [isCastOnCanvas]);
+
 console.log(isVideoOnCanvas);
   return (
     <>
@@ -161,7 +238,7 @@ console.log(isVideoOnCanvas);
       </div>
       
       <div className="canvas">
-        <canvas ref={canvasRef} width="850" height="450"></canvas>
+        <canvas ref={canvasRef} id="canvas-1" className="canvas-canvas"></canvas>
       </div>
       
       <div id="controls">
@@ -171,13 +248,13 @@ console.log(isVideoOnCanvas);
         <button className="control-container" id="mic-btn" onClick={toggleMic}>
           <img src={mic} alt="mic" />
         </button>
-        <button className="control-container" id="invite-btn" onClick={openPopup}>
-          <img src={invite} alt="start streaming" />
+        <button className="control-container" id="invite-btn" onClick={toggleCastOnCanvas}>
+          <img src={cast} alt="start streaming" />
         </button>
       </div>
 
       <div className="GoLive">
-        <button className="btn btn-primary">Go Live</button>
+        <button className="btn btn-primary" onClick={openPopup}>Go Live</button>
       </div>
     </>
   );

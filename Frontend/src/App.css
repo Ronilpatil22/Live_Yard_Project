@@ -1,0 +1,23 @@
+/* .App {
+    min-height: 100vh; /* Use vh instead of % for viewport height */
+    /* overflow: hidden; Ensure no scrollbars appear */
+    /* position: relative; Ensure the header stays on top */
+  /* } */
+  
+  /* .App img {
+    opacity: 70%;
+    height: 100%;
+    width: 100%;
+    object-fit: cover; 
+    position: fixed; 
+    top: 0;
+    left: 0;
+    z-index: -1; 
+  }
+  
+  .header {
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+  } */
+  /* */ 

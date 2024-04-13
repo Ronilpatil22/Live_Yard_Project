@@ -1,150 +1,150 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  .video-player {
-    background-color: black;
-    width: 100vh;
-    height: 100vh;
-    object-fit: cover;
-  }
-  #videos {
-    display: grid;
-    grid-template-columns: 1fr;
-    height: 100vh;
-    overflow: hidden;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.video-player {
+  background-color: black;
+  width: 100vh;
+  height: 100vh;
+  object-fit: cover;
+}
+#videos {
+  display: grid;
+  grid-template-columns: 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.smallFrame {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  height: 170px;
+  width: 300px;
+  border-radius: 5px;
+  border: 2px solid #b366f9;
+  -webkit-box-shadow: 3px 3px 15px -1px rgba(0, 0, 0, 0.77);
+  box-shadow: 3px 3px 15px -1px rgba(0, 0, 0, 0.77);
+  z-index: 999;
+}
+
+#controls {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1em;
+}
+
+.control-container {
+  background-color: rgb(179, 102, 249, 0.9);
+  padding: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.control-container img {
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+}
+
+#invite-btn {
+  background-color: rgb(179, 102, 249, 0.9);
+}
+
+@media screen and (max-width: 600px) {
   .smallFrame {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    height: 170px;
-    width: 300px;
-    border-radius: 5px;
-    border: 2px solid #b366f9;
-    -webkit-box-shadow: 3px 3px 15px -1px rgba(0, 0, 0, 0.77);
-    box-shadow: 3px 3px 15px -1px rgba(0, 0, 0, 0.77);
-    z-index: 999;
+    height: 80px;
+    width: 120px;
   }
-  
-  #controls {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 1em;
-  }
-  
-  .control-container {
-    background-color: rgb(179, 102, 249, 0.9);
-    padding: 20px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-  
+
   .control-container img {
-    height: 30px;
-    width: 30px;
-    object-fit: cover;
+    height: 20px;
+    width: 20px;
   }
-  
-  #invite-btn {
-    background-color: rgb(179, 102, 249, 0.9);
-  }
-  
-  @media screen and (max-width: 600px) {
-    .smallFrame {
-      height: 80px;
-      width: 120px;
-    }
-  
-    .control-container img {
-      height: 20px;
-      width: 20px;
-    }
-  }
-  
-  #chat-container {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 100vh;
-    background-color: #fff;
-    border-left: 1px solid #ccc;
-    z-index: 999;
-  }
-  
-  #container {
-    display: flex;
-    position: relative;
-    width: 100%;
-    height: 100vh;
-  }
-  
-  #videos,
-  #chat-container {
-    flex: 1;
-    overflow: hidden;
-  }
-  
-  #videos {
-    background-color: black;
-  }
-  
-  #divider {
-    width: 1px;
-    cursor: col-resize;
-    background-color: #ccc;
-  }
-  
-  #chat-container {
-    background-color: #fff;
-  }
-  
-  /* Messages CSS*/
-  /* Existing CSS remains the same */
-  
-  .messages {
-    overflow-y: auto;
-    max-height: calc(100% - 40px); /* Adjust as needed */
-    background-color: #f2f2f2;
-    border-radius: 1px;
-    padding: 10px;
-  }
-  
-  .input-container {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-top: 1px solid #ccc;
-  }
-  
-  .input-container input {
-    flex: 1;
-    padding: 8px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .input-container button {
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .input-container button:hover {
-    background-color: #0056b3;
-  }
+}
+
+#chat-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100vh;
+  background-color: #fff;
+  border-left: 1px solid #ccc;
+  z-index: 999;
+}
+
+#container {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+#videos,
+#chat-container {
+  flex: 1;
+  overflow: hidden;
+}
+
+#videos {
+  background-color: black;
+}
+
+#divider {
+  width: 1px;
+  cursor: col-resize;
+  background-color: #ccc;
+}
+
+#chat-container {
+  background-color: #fff;
+}
+
+/* Messages CSS*/
+/* Existing CSS remains the same */
+
+.messages {
+  overflow-y: auto;
+  max-height: calc(100% - 40px); /* Adjust as needed */
+  background-color: #f2f2f2;
+  border-radius: 1px;
+  padding: 10px;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.input-container input {
+  flex: 1;
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.input-container button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.input-container button:hover {
+  background-color: #0056b3;
+}
