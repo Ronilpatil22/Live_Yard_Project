@@ -24,7 +24,7 @@ function App() {
     <>
       <div className="App">
         <Routes>
-          <Route path="/lobby" element={authUser?<Lobby />:<Login/>}></Route>
+          <Route path="/lobby" element={<Lobby />}></Route>
           <Route
             path="/"
             element={authUser?<Home />:<Login/>}

@@ -186,44 +186,45 @@ export default function Lobby() {
   }, [isVideoOnCanvas]);
 
   useEffect(() => {
-    if(isCastOnCanvas){
+    if (isCastOnCanvas) {
       const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    let videoElement = captureScreen();
-    const drawFrame = () => {
-      
-      // Clear the canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw the screen share stream onto the canvas
-      ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-
-      // Request the next frame
-      requestAnimationFrame(drawFrame);
-    };
-
-    // Get the screen share stream
-    navigator.mediaDevices.getDisplayMedia({ video: true })
-      .then(stream => {
-        // Create a video element to play the stream
-        const videoElement = document.createElement('video');
-        videoElement.srcObject = stream;
-        videoElement.play();
-
-        // Start drawing frames onto the canvas
-        drawFrame();
-      })
-      .catch(error => {
-        console.error('Error accessing screen share:', error);
-      });
-      setIsCastOnCanvas(!isCastOnCanvas)
+      const ctx = canvas.getContext("2d");
+      let videoElement;
+  
+      const drawFrame = () => {
+        // Clear the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+        // Draw the screen share stream onto the canvas
+        ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+  
+        // Request the next frame
+        requestAnimationFrame(drawFrame);
+      };
+  
+      // Get the screen share stream
+      navigator.mediaDevices
+        .getDisplayMedia({ video: { width:1920, height: 1080 , frameRate:20 }, audio: false })
+        .then((stream) => {
+          // Create a video element to play the stream
+          videoElement = document.createElement("video");
+          videoElement.srcObject = stream;
+          videoElement.play();
+  
+          // Start drawing frames onto the canvas
+          drawFrame();
+        })
+        .catch((error) => {
+          console.error("Error accessing screen share:", error);
+        });
     }
+  
     // Cleanup function
     return () => {
-      // Stop the screen share stream if it's still active
-      // videoElement.srcObject.getTracks().forEach(track => track.stop());
+      // You may want to add cleanup logic here if needed
     };
   }, [isCastOnCanvas]);
+  
 
 console.log(isVideoOnCanvas);
   return (
