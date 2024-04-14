@@ -23,7 +23,7 @@ export default function Lobby() {
   const [isCastOnCanvas,setIsCastOnCanvas] = useState(false);
   const canvasRef = useRef(null);
 
-  useEffect(() => {
+  useEffect(() => {               
     async function connect() {
       if (!localStream) {
         localStream = await navigator.mediaDevices.getUserMedia({
@@ -149,80 +149,124 @@ export default function Lobby() {
   }
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+    // const canvas = canvasRef.current;
+    // const ctx = canvas.getContext("2d");
   
-    let animationFrameId;
+    // let animationFrameId;
   
-    const drawFrame = () => {
-      // Clear the canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // const drawFrame = () => {
+    //   // Clear the canvas
+    //   ctx.clearRect(0, 0, canvas.width, canvas.height);
   
-      if (isVideoOnCanvas) {
-        const video = document.getElementById("user-1");
-        if (video instanceof HTMLVideoElement) {
-          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        } else {
-          console.error("Element with ID 'user-1' is not a video element");
-        }
-      } else {
-        const image = document.querySelector(".canvas");
-        if (image instanceof HTMLImageElement) {
-          ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-        } else {
-          console.error("Element with class 'canvas' is not an image element");
-        }
-      }
+    //   if (isVideoOnCanvas) {
+    //     const video = document.getElementById("user-1");
+    //     if (video instanceof HTMLVideoElement) {
+    //       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    //     } else {
+    //       console.error("Element with ID 'user-1' is not a video element");
+    //     }
+    //   } else {
+    //     const image = document.querySelector(".canvas");
+    //     if (image instanceof HTMLImageElement) {
+    //       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    //     } else {
+    //       console.error("Element with class 'canvas' is not an image element");
+    //     }
+    //   }
   
-      animationFrameId = requestAnimationFrame(drawFrame);
-    };
+    //   animationFrameId = requestAnimationFrame(drawFrame);
+    // };
   
-    drawFrame();
+    // drawFrame();
   
-    // Cleanup function
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-    };
+    // // Cleanup function
+    // return () => {
+    //   cancelAnimationFrame(animationFrameId);
+    // };
+
+    //My Code
+    let videoElement = document.getElementById("canvas-1");
+
+  // When isVideoOnCanvas is true, display the video stream directly in the video element
+  if (isVideoOnCanvas) {
+    const video = document.getElementById("user-1");
+    if (video instanceof HTMLVideoElement) {
+      videoElement.srcObject = video.srcObject;
+      videoElement.play();
+    } else {
+      console.error("Element with ID 'user-1' is not a video element");
+    }
+  } else {
+    // When isVideoOnCanvas is false, clear the video stream from the video element
+    videoElement.srcObject = null;
+  }
   }, [isVideoOnCanvas]);
 
   useEffect(() => {
-    if (isCastOnCanvas) {
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext("2d");
-      let videoElement;
+  //   if (isCastOnCanvas) {
+  //     const canvas = canvasRef.current;
+  //     const ctx = canvas.getContext("2d");
+  //     let videoElement;
   
-      const drawFrame = () => {
-        // Clear the canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //     const drawFrame = () => {
+  //       // Clear the canvas
+  //       ctx.clearRect(0, 0, canvas.width, canvas.height);
   
-        // Draw the screen share stream onto the canvas
-        ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+  //       // Draw the screen share stream onto the canvas
+  //       ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
   
-        // Request the next frame
-        requestAnimationFrame(drawFrame);
-      };
+  //       // Request the next frame
+  //       requestAnimationFrame(drawFrame);
+  //     };
   
-      // Get the screen share stream
-      navigator.mediaDevices
-        .getDisplayMedia({ video: { width:1920, height: 1080 , frameRate:20 }, audio: false })
-        .then((stream) => {
-          // Create a video element to play the stream
-          videoElement = document.createElement("video");
-          videoElement.srcObject = stream;
-          videoElement.play();
+  //     // Get the screen share stream
+  //     navigator.mediaDevices
+  //       .getDisplayMedia({ video: { width:1920, height: 1080 , frameRate:20 }, audio: false })
+  //       .then((stream) => {
+  //         // Create a video element to play the stream
+  //         videoElement = document.createElement("video");
+  //         videoElement.srcObject = stream;
+  //         videoElement.play();
   
-          // Start drawing frames onto the canvas
-          drawFrame();
-        })
-        .catch((error) => {
-          console.error("Error accessing screen share:", error);
-        });
+  //         // Start drawing frames onto the canvas
+  //         drawFrame();
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error accessing screen share:", error);
+  //       });
+  //   }
+  
+  //   // Cleanup function
+  //   return () => {
+  //     // You may want to add cleanup logic here if needed
+  //   };
+  
+  let videoElement = document.getElementById("canvas-1");
+    videoElement.srcObject = null;
+  if (isCastOnCanvas) {
+    // Get the screen share stream
+    navigator.mediaDevices.getDisplayMedia({ video: true, audio: false })
+      .then((stream) => {
+        // Set the screen share stream as the source object of the video element
+        videoElement.srcObject = stream;
+        videoElement.play();
+      })
+      .catch((error) => {
+        console.error("Error accessing screen share:", error);
+      });
+  } else {
+    // If isCastOnCanvas is false, clear the srcObject of the video element
+    videoElement.srcObject = null;
+  }
+
+  // Cleanup function
+  return () => {
+    // Stop the screen share stream when the component unmounts
+    if (videoElement.srcObject) {
+      const tracks = videoElement.srcObject.getTracks();
+      tracks.forEach(track => track.stop());
     }
-  
-    // Cleanup function
-    return () => {
-      // You may want to add cleanup logic here if needed
-    };
+  };
   }, [isCastOnCanvas]);
   
 
@@ -239,7 +283,9 @@ console.log(isVideoOnCanvas);
       </div>
       
       <div className="canvas">
-        <canvas ref={canvasRef} id="canvas-1" className="canvas-canvas"></canvas>
+        {/* <canvas ref={canvasRef} id="canvas-1" className="canvas-canvas"></canvas> */}
+        <video id="canvas-1" className="canvas-canvas" autoPlay ></video>
+
       </div>
       
       <div id="controls">
