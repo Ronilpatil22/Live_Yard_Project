@@ -149,41 +149,6 @@ export default function Lobby() {
   }
 
   useEffect(() => {
-    // const canvas = canvasRef.current;
-    // const ctx = canvas.getContext("2d");
-  
-    // let animationFrameId;
-  
-    // const drawFrame = () => {
-    //   // Clear the canvas
-    //   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
-    //   if (isVideoOnCanvas) {
-    //     const video = document.getElementById("user-1");
-    //     if (video instanceof HTMLVideoElement) {
-    //       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    //     } else {
-    //       console.error("Element with ID 'user-1' is not a video element");
-    //     }
-    //   } else {
-    //     const image = document.querySelector(".canvas");
-    //     if (image instanceof HTMLImageElement) {
-    //       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-    //     } else {
-    //       console.error("Element with class 'canvas' is not an image element");
-    //     }
-    //   }
-  
-    //   animationFrameId = requestAnimationFrame(drawFrame);
-    // };
-  
-    // drawFrame();
-  
-    // // Cleanup function
-    // return () => {
-    //   cancelAnimationFrame(animationFrameId);
-    // };
-
     //My Code
     let videoElement = document.getElementById("canvas-1");
 
@@ -203,44 +168,6 @@ export default function Lobby() {
   }, [isVideoOnCanvas]);
 
   useEffect(() => {
-  //   if (isCastOnCanvas) {
-  //     const canvas = canvasRef.current;
-  //     const ctx = canvas.getContext("2d");
-  //     let videoElement;
-  
-  //     const drawFrame = () => {
-  //       // Clear the canvas
-  //       ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
-  //       // Draw the screen share stream onto the canvas
-  //       ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-  
-  //       // Request the next frame
-  //       requestAnimationFrame(drawFrame);
-  //     };
-  
-  //     // Get the screen share stream
-  //     navigator.mediaDevices
-  //       .getDisplayMedia({ video: { width:1920, height: 1080 , frameRate:20 }, audio: false })
-  //       .then((stream) => {
-  //         // Create a video element to play the stream
-  //         videoElement = document.createElement("video");
-  //         videoElement.srcObject = stream;
-  //         videoElement.play();
-  
-  //         // Start drawing frames onto the canvas
-  //         drawFrame();
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error accessing screen share:", error);
-  //       });
-  //   }
-  
-  //   // Cleanup function
-  //   return () => {
-  //     // You may want to add cleanup logic here if needed
-  //   };
-  
   let videoElement = document.getElementById("canvas-1");
     videoElement.srcObject = null;
   if (isCastOnCanvas) {
