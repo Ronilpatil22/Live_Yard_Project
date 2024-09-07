@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node Backend/server.js",
-    "build": "react-scripts build",
+    "build": "node Backend/server.js",
+    "start": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "node Backend/server.js"

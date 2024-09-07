@@ -25,7 +25,7 @@ export default function Login() {
           <p className="d-flex me-4 mb-0">
             <i className="bi-person custom-icon me-2" />
             <strong className="text-dark">
-              Welcome to Music Festival 2023
+              Welcome to LiveYard
             </strong>
           </p>
         </div>
@@ -40,12 +40,12 @@ export default function Login() {
       >
        LiveYard
       </a>
-      <a
+      {/* <a
         className="btn custom-btn d-lg-none ms-auto me-4"
         href="ticket.html"
       >
         Buy Ticket
-      </a>
+      </a> */}
       <button
         aria-controls="navbarNav"
         aria-expanded="false"

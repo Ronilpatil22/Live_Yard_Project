@@ -6,20 +6,6 @@ import Login from "./components/js/login";
 import Signup from "./components/js/signup";
 import { BrowserRouter, createBrowserRouter,RouterProvider } from "react-router-dom";
 import { AuthContextProvider } from "./Context/AuthContext";
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <App />
-//   },
-//   {
-//     path: "/login",
-//     element: <Login />
-//   },
-//   {
-//     path: "/signup",
-//     element: <Signup />
-//   }
-// ])
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   
