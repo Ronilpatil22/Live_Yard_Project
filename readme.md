@@ -37,16 +37,6 @@ Maybe you can mention me or this repo in the acknowledgements too
     <img src="https://img.shields.io/github/license/Louis3797/awesome-readme-template.svg" alt="license" />
   </a>
 </p>
-   
-<h4>
-    <a href="https://github.com/Louis3797/awesome-readme-template/">View Demo</a>
-  <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template">Documentation</a>
-  <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template/issues/">Report Bug</a>
-  <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template/issues/">Request Feature</a>
-  </h4>
 </div>
 
 <br />
@@ -149,10 +139,10 @@ To run this project, you will need to add the following environment variables to
 
 `JWT_SECRET`
 
-<!-- Getting Started -->
+<!-- Getting Started 
 ## 	:toolbox: Getting Started
 
-<!-- Prerequisites -->
+<!-- Prerequisites 
 ### :bangbang: Prerequisites
 
 This project uses Yarn as package manager
@@ -161,7 +151,7 @@ This project uses Yarn as package manager
  npm install --global yarn
 ```
 
-<!-- Installation -->
+<!-- Installation
 ### :gear: Installation
 
 Install my-project with npm
@@ -171,7 +161,7 @@ Install my-project with npm
   cd my-project
 ```
    
-<!-- Running Tests -->
+<!-- Running Tests
 ### :test_tube: Running Tests
 
 To run tests, run the following command
@@ -180,7 +170,7 @@ To run tests, run the following command
   yarn test test
 ```
 
-<!-- Run Locally -->
+<!-- Run Locally 
 ### :running: Run Locally
 
 Clone the project
@@ -208,7 +198,7 @@ Start the server
 ```
 
 
-<!-- Deployment -->
+<!-- Deployment 
 ### :triangular_flag_on_post: Deployment
 
 To deploy this project run
@@ -217,7 +207,7 @@ To deploy this project run
   yarn deploy
 ```
 
-
+-->
 <!-- Usage -->
 ## :eyes: Usage
 
