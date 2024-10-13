@@ -81,12 +81,12 @@ Maybe you can mention me or this repo in the acknowledgements too
 
 
 <!-- Screenshots -->
-### :camera: Screenshots
+<!-- ### :camera: Screenshots
 
 <div align="center"> 
   <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
 </div>
-
+-->
 
 <!-- TechStack -->
 ### :space_invader: Tech Stack
@@ -95,7 +95,6 @@ Maybe you can mention me or this repo in the acknowledgements too
   <summary>Client</summary>
   <ul>
     <li><a href="https://www.typescriptlang.org/">JavaScript</a></li>
-<!--     <li><a href="https://nextjs.org/">Next.js</a></li> -->
     <li><a href="https://reactjs.org/">React.js</a></li>
     <li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
   </ul>
@@ -106,22 +105,13 @@ Maybe you can mention me or this repo in the acknowledgements too
   <ul>
     <li><a href="https://www.typescriptlang.org/">Node.js</a></li>
     <li><a href="https://expressjs.com/">Express.js</a></li>
-<!--     <li><a href="https://go.dev/">Golang</a></li> -->
-<!--     <li><a href="https://nestjs.com/">Nest.js</a></li> -->
-<!--     <li><a href="https://socket.io/">SocketIO</a></li> -->
-<!--     <li><a href="https://www.prisma.io/">Prisma</a></li>     -->
-<!--     <li><a href="https://www.apollographql.com/">Apollo</a></li> -->
-<!--     <li><a href="https://graphql.org/">GraphQL</a></li> -->
+   <li><a href="https://socket.io/">SocketIO</a></li>
   </ul>
 </details>
 
 <details>
 <summary>Database</summary>
   <ul>
-<!--     <li><a href="https://www.mysql.com/">MySQL</a></li> -->
-<!--     <li><a href="https://www.postgresql.org/">PostgreSQL</a></li> -->
-<!--     <li><a href="https://redis.io/">Redis</a></li> -->
-<!--     <li><a href="https://neo4j.com/">Neo4j</a></li> -->
     <li><a href="https://www.mongodb.com/">MongoDB</a></li>
   </ul>
 </details>
@@ -130,18 +120,26 @@ Maybe you can mention me or this repo in the acknowledgements too
 <summary>DevOps</summary>
   <ul>
     <li><a href="https://www.docker.com/">Docker</a></li>
-<!--     <li><a href="https://www.jenkins.io/">Jenkins</a></li> -->
-<!--     <li><a href="https://circleci.com/">CircleCLI</a></li> -->
   </ul>
 </details>
 
 <!-- Features -->
 ### :dart: Features
 
-- Feature 1
-- Feature 2
-- Feature 3
+- **FFMPEG-Based RTMP Encoder** : 
+Developed a custom encoder using FFMPEG within a Dockerized Ubuntu container to efficiently convert input streams into RTMP format, optimizing for seamless YouTube live streaming.
 
+- **MERN Stack Implementation** :
+Built a full-stack web application using the MERN stack (MongoDB, Express.js, React, Node.js), providing a robust platform for managing live stream data and user interaction.
+
+- **Real-Time Data Handling with WebSocket** :
+Integrated WebSocket libraries for real-time communication between the client and server, ensuring low-latency data transfer and smooth live streaming.
+
+- **Docker Integration** :
+Leveraged Docker to create an isolated, portable container environment, making the setup and deployment process easy and efficient across different systems.
+
+- **Optimized for YouTube** :
+The system is specifically optimized for YouTube live streaming, ensuring high performance and reliable stream delivery.
 
 <!-- Env Variables -->
 ### :key: Environment Variables
@@ -239,12 +237,12 @@ function App() {
 }
 ```
 
-<!-- Roadmap -->
+<!-- Roadmap
 ## :compass: Roadmap
 
 * [x] Todo 1
 * [ ] Todo 2
-
+-->
 
 <!-- Contributing -->
 ## :wave: Contributing
@@ -253,18 +251,18 @@ function App() {
   <img src="https://contrib.rocks/image?repo=Ronilpatil22/Live_Yard_Project" />
 </a>
 
-
+<!--
 Contributions are always welcome!
 
 See `contributing.md` for ways to get started.
 
 
-<!-- Code of Conduct -->
+<!-- Code of Conduct 
 ### :scroll: Code of Conduct
 
 Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-template/blob/master/CODE_OF_CONDUCT.md)
 
-<!-- FAQ -->
+<!-- FAQ 
 ## :grey_question: FAQ
 
 - Question 1
@@ -276,11 +274,11 @@ Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-te
   + Answer 2
 
 
-<!-- License -->
+<!-- License 
 ## :warning: License
 
 Distributed under the no License. See LICENSE.txt for more information.
-
+-->
 
 <!-- Contact -->
 ## :handshake: Contact
@@ -295,7 +293,7 @@ Project Link: [https://github.com/Ronilpatil22/Live_Yard_Project](https://github
 
 Use this section to mention useful resources and libraries that you have used in your projects.
 
- - [Shields.io](https://shields.io/)
+ - [Socket.io](https://socket.io/)
  - [Awesome README](https://github.com/matiassingers/awesome-readme)
  - [Emoji Cheat Sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#travel--places)
  - [Readme Template](https://github.com/othneildrew/Best-README-Template)
